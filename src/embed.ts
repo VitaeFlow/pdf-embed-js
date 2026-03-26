@@ -1,0 +1,49 @@
+import {
+  PDFDocument,
+  AFRelationship as PdfLibAFRelationship,
+} from 'pdf-lib';
+import type { AFRelationship, EmbedOptions } from './types.js';
+import { writeXmpToDoc } from './xmp.js';
+
+const AF_RELATIONSHIP_MAP: Record<AFRelationship, PdfLibAFRelationship> = {
+  Alternative: PdfLibAFRelationship.Alternative,
+  Source: PdfLibAFRelationship.Source,
+  Data: PdfLibAFRelationship.Data,
+  Supplement: PdfLibAFRelationship.Supplement,
+  Unspecified: PdfLibAFRelationship.Unspecified,
+};
+
+/**
+ * Embed a file in a PDF document.
+ *
+ * The file is registered both in the EmbeddedFiles name tree (PDF 1.7)
+ * and the AF array (PDF/A-3) for maximum compatibility.
+ *
+ * @param pdf - The source PDF as a Uint8Array.
+ * @param data - The file content to embed (Uint8Array or UTF-8 string).
+ * @param options - Embedding options (filename, mimeType, etc.).
+ * @returns The modified PDF as a Uint8Array.
+ */
+export async function embed(
+  pdf: Uint8Array,
+  data: Uint8Array | string,
+  options: EmbedOptions,
+): Promise<Uint8Array> {
+  const fileData =
+    typeof data === 'string' ? new TextEncoder().encode(data) : data;
+
+  const pdfDoc = await PDFDocument.load(pdf);
+  const relationship = options.relationship ?? 'Unspecified';
+
+  await pdfDoc.attach(fileData, options.filename, {
+    mimeType: options.mimeType ?? 'application/octet-stream',
+    description: options.description,
+    afRelationship: AF_RELATIONSHIP_MAP[relationship],
+  });
+
+  if (options.xmp) {
+    writeXmpToDoc(pdfDoc, options.xmp);
+  }
+
+  return pdfDoc.save();
+}
