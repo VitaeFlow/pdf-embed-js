@@ -1,6 +1,6 @@
 {
   "name": "@vitaeflow/pdf-embed",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Embed and extract files in PDF documents (PDF/A-3 compatible)",
   "type": "module",
   "main": "./dist/index.js",
@@ -11,14 +11,23 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "tsc --noEmit"
   },
-  "keywords": ["pdf", "embed", "attach", "extract", "pdf-a3", "factur-x"],
+  "keywords": [
+    "pdf",
+    "embed",
+    "attach",
+    "extract",
+    "pdf-a3",
+    "factur-x"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
