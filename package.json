@@ -31,7 +31,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/VitaeFlow/pdf-embed-js.git"
+    "url": "git+https://github.com/VitaeFlow/pdf-embed-js.git"
   },
   "homepage": "https://github.com/VitaeFlow/pdf-embed-js#readme",
   "bugs": "https://github.com/VitaeFlow/pdf-embed-js/issues",
