@@ -1,9 +1,11 @@
 import { PDFDocument, PDFName, PDFArray, PDFDict, PDFRef } from 'pdf-lib';
+
 import {
   getEmbeddedFilesDict,
   pdfStringValue,
   getStreamRef,
   resolve,
+  rebuildAfArray,
 } from './pdf-utils.js';
 
 /**
@@ -73,18 +75,3 @@ export async function remove(
   return pdfDoc.save();
 }
 
-function rebuildAfArray(pdfDoc: PDFDocument, names: PDFArray): void {
-  const catalog = pdfDoc.catalog;
-
-  if (names.size() === 0) {
-    catalog.delete(PDFName.of('AF'));
-    return;
-  }
-
-  const newAf = pdfDoc.context.obj([]);
-  for (let i = 1; i < names.size(); i += 2) {
-    const ref = names.get(i);
-    if (ref) newAf.push(ref);
-  }
-  catalog.set(PDFName.of('AF'), newAf);
-}

@@ -59,6 +59,7 @@ describe('writeXmp / readXmp', () => {
     });
 
     const props = await readXmp(second);
+    expect(props.A).toBe('1');
     expect(props.B).toBe('updated');
     expect(props.C).toBe('3');
   });

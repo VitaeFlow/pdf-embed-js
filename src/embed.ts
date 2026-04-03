@@ -13,6 +13,7 @@ import {
   pdfStringValue,
   getStreamRef,
   resolve,
+  rebuildAfArray,
 } from './pdf-utils.js';
 
 const AF_RELATIONSHIP_MAP: Record<AFRelationship, PdfLibAFRelationship> = {
@@ -98,18 +99,7 @@ function removeExistingAttachment(
     names.remove(i + 1);
     names.remove(i);
 
-    // Rebuild the AF array
-    const catalog = pdfDoc.catalog;
-    if (names.size() === 0) {
-      catalog.delete(PDFName.of('AF'));
-    } else {
-      const newAf = pdfDoc.context.obj([]);
-      for (let j = 1; j < names.size(); j += 2) {
-        const ref = names.get(j);
-        if (ref) newAf.push(ref);
-      }
-      catalog.set(PDFName.of('AF'), newAf);
-    }
+    rebuildAfArray(pdfDoc, names);
 
     return;
   }

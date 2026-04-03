@@ -153,3 +153,24 @@ export function decodeXmpStream(stream: PDFRawStream): string {
   const bytes = decodePDFRawStream(stream).decode();
   return new TextDecoder().decode(bytes);
 }
+
+/**
+ * Rebuild the catalog-level AF array from the remaining entries
+ * in the EmbeddedFiles name tree. Removes the AF key entirely
+ * if no entries remain.
+ */
+export function rebuildAfArray(pdfDoc: PDFDocument, names: PDFArray): void {
+  const catalog = pdfDoc.catalog;
+
+  if (names.size() === 0) {
+    catalog.delete(PDFName.of('AF'));
+    return;
+  }
+
+  const newAf = pdfDoc.context.obj([]);
+  for (let i = 1; i < names.size(); i += 2) {
+    const ref = names.get(i);
+    if (ref) newAf.push(ref);
+  }
+  catalog.set(PDFName.of('AF'), newAf);
+}

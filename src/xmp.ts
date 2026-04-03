@@ -157,10 +157,14 @@ function mergeIntoExistingXmp(xmp: string, options: XmpOptions): string {
   const existingBlock = nsPattern.exec(xmp);
 
   if (existingBlock) {
-    // Replace the existing block with updated properties
+    // Parse existing properties from the block and merge with new ones
+    const existingProps = parseCustomXmpProperties(existingBlock[0]);
+    const mergedProps = { ...existingProps, ...options.properties };
+    const mergedOptions = { ...options, properties: mergedProps };
+
     const newBlock = `<rdf:Description rdf:about=""
       xmlns:${options.prefix}="${escapeXml(options.namespace)}">
-${buildPropsXml(options)}
+${buildPropsXml(mergedOptions)}
     </rdf:Description>`;
     return xmp.slice(0, existingBlock.index) + newBlock + xmp.slice(existingBlock.index + existingBlock[0].length);
   }
