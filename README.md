@@ -1,8 +1,11 @@
 # @vitaeflow/pdf-embed
 
-A generic library for embedding and extracting files in PDF documents, compatible with PDF/A-3.
+[![npm version](https://img.shields.io/npm/v/@vitaeflow/pdf-embed.svg)](https://www.npmjs.com/package/@vitaeflow/pdf-embed)
+[![license](https://img.shields.io/npm/l/@vitaeflow/pdf-embed.svg)](LICENSE)
 
-Works in Node.js and browsers. Built on [pdf-lib](https://github.com/Hopding/pdf-lib).
+A generic library for embedding and extracting files in PDF documents, compatible with PDF/A-3. Built on [pdf-lib](https://github.com/Hopding/pdf-lib).
+
+Works in Node.js and browsers.
 
 ## Install
 
