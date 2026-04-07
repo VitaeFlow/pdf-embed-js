@@ -1,5 +1,6 @@
 # @vitaeflow/pdf-embed
 
+[![CI](https://github.com/VitaeFlow/pdf-embed-js/actions/workflows/ci.yml/badge.svg)](https://github.com/VitaeFlow/pdf-embed-js/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/@vitaeflow/pdf-embed.svg)](https://www.npmjs.com/package/@vitaeflow/pdf-embed)
 [![license](https://img.shields.io/npm/l/@vitaeflow/pdf-embed.svg)](LICENSE)
 
