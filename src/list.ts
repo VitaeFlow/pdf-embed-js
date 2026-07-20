@@ -3,6 +3,7 @@ import type { AFRelationship, EmbeddedFileInfo } from './types.js';
 import {
   getEmbeddedFilesDict,
   collectNameTreeEntries,
+  pdfDateValue,
   pdfStringValue,
   readPdfNumber,
   resolve,
@@ -72,6 +73,16 @@ export async function list(pdf: Uint8Array): Promise<EmbeddedFileInfo[]> {
         if (params instanceof PDFDict) {
           const size = readPdfNumber(params, 'Size', pdfDoc.context);
           if (size !== undefined) info.size = size;
+
+          const creationDate = pdfDateValue(
+            resolve(params.get(PDFName.of('CreationDate')), pdfDoc.context),
+          );
+          if (creationDate) info.creationDate = creationDate;
+
+          const modificationDate = pdfDateValue(
+            resolve(params.get(PDFName.of('ModDate')), pdfDoc.context),
+          );
+          if (modificationDate) info.modificationDate = modificationDate;
         }
         if (info.size === 0) {
           info.size = stream.contents.length;

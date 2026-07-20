@@ -52,6 +52,8 @@ export async function embed(
   await pdfDoc.attach(fileData, options.filename, {
     mimeType: options.mimeType ?? 'application/octet-stream',
     description: options.description,
+    creationDate: options.creationDate,
+    modificationDate: options.modificationDate,
     afRelationship: AF_RELATIONSHIP_MAP[relationship],
   });
 

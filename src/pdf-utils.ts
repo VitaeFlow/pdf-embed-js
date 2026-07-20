@@ -40,6 +40,22 @@ export function pdfStringValue(obj: unknown): string | undefined {
 }
 
 /**
+ * Extract a date from a PDF date string. Malformed dates are ignored so that
+ * listing attachments remains resilient when reading third-party PDFs.
+ */
+export function pdfDateValue(obj: unknown): Date | undefined {
+  if (!(obj instanceof PDFString) && !(obj instanceof PDFHexString)) {
+    return undefined;
+  }
+
+  try {
+    return obj.decodeDate();
+  } catch {
+    return undefined;
+  }
+}
+
+/**
  * Get the EmbeddedFiles name tree dict from a PDF document catalog.
  */
 export function getEmbeddedFilesDict(

@@ -17,6 +17,10 @@ export interface EmbedOptions {
   filename: string;
   /** MIME type of the embedded file. Defaults to 'application/octet-stream'. */
   mimeType?: string;
+  /** Creation date stored in the embedded file's PDF metadata. */
+  creationDate?: Date;
+  /** Last modification date stored in the embedded file's PDF metadata. */
+  modificationDate?: Date;
   /** Relationship between the file and the PDF. Defaults to 'Unspecified'. */
   relationship?: AFRelationship;
   /** Human-readable description of the file. */
@@ -47,6 +51,10 @@ export interface EmbeddedFileInfo {
   mimeType?: string;
   /** Size in bytes of the embedded file. */
   size: number;
+  /** Creation date from the embedded file's PDF metadata, if specified. */
+  creationDate?: Date;
+  /** Last modification date from the embedded file's PDF metadata, if specified. */
+  modificationDate?: Date;
   /** AFRelationship, if specified. */
   relationship?: AFRelationship;
   /** Description, if specified. */
