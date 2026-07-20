@@ -4,9 +4,13 @@
 [![npm version](https://img.shields.io/npm/v/@vitaeflow/pdf-embed.svg)](https://www.npmjs.com/package/@vitaeflow/pdf-embed)
 [![license](https://img.shields.io/npm/l/@vitaeflow/pdf-embed.svg)](LICENSE)
 
-A generic library for embedding and extracting files in PDF documents, compatible with PDF/A-3. Built on [pdf-lib](https://github.com/Hopding/pdf-lib).
+A generic library for embedding and extracting associated files in PDF documents. It writes the file attachment structures used by PDF/A-3, but it does not convert or validate documents as fully PDF/A-3 compliant. Built on [pdf-lib](https://github.com/Hopding/pdf-lib).
 
 Works in Node.js and browsers.
+
+## PDF/A-3 note
+
+This library adds embedded files, `AFRelationship`, and catalog-level associated file references. That is only one part of PDF/A-3. Full PDF/A-3 conformance also depends on the source PDF and requirements such as PDF/A identification metadata, color profiles, font embedding, encryption restrictions, and validation with a dedicated PDF/A checker.
 
 ## Install
 
