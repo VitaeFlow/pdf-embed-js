@@ -34,6 +34,8 @@ const result = await embed(new Uint8Array(pdf), data, {
   mimeType: 'application/json',
   relationship: 'Alternative',
   description: 'Structured data',
+  creationDate: new Date('2025-02-03T10:11:12Z'),
+  modificationDate: new Date('2026-07-20T14:15:16Z'),
 });
 
 writeFileSync('output.pdf', result);

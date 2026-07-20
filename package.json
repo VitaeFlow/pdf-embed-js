@@ -1,6 +1,6 @@
 {
   "name": "@vitaeflow/pdf-embed",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Embed and extract associated files in PDF documents",
   "type": "module",
   "main": "./dist/index.js",
